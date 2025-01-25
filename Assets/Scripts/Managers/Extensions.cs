@@ -4,29 +4,17 @@ using UnityEngine;
 
 public static class Extensions
 {
-    public static void Shuffle<T>(this T[] array,int shuffleAccuracy)
+    /// <summary>
+    /// Shuffles the elements of a list randomly.
+    /// </summary>
+    public static void Shuffle<T>(this List<T> list)
     {
-        for (int i = 0; i < shuffleAccuracy; i++)
+        for (int i = list.Count - 1; i > 0; i--)
         {
-            int randomIndex=Random.Range(1,array.Length);
-
-            T temp=array[randomIndex];
-            array[randomIndex]=array[0];
-            array[0]=temp;
-
-        }
-    }
-
-    public static void Shuffle<T>(this List<T> list,int shuffleAccuracy)
-    {
-        for (int i = 0; i < shuffleAccuracy; i++)
-        {
-            int randomIndex=Random.Range(1,list.Count);
-
-            T temp=list[randomIndex];
-            list[randomIndex]=list[0];
-            list[0]=temp;
-
+            int randomIndex = Random.Range(0, i + 1);
+            T temp = list[i];
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
         }
     }
 }
