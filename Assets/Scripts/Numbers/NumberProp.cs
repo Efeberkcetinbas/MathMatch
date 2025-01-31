@@ -9,6 +9,8 @@ public class NumberProp : MonoBehaviour
 
     internal int numberValue;
 
+    public SkinnedMeshRenderer skinnedMeshRenderer;
+
     public void SetNumberValue(int value)
     {
         if (numberText != null)

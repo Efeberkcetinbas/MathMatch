@@ -31,15 +31,16 @@ public class NumberGenerator : MonoBehaviour
             GameObject numberObj = Instantiate(data.numberPrefab, chosenPosition.position, Quaternion.identity);
 
             // Assign color based on value
-            Renderer renderer = numberObj.GetComponent<Renderer>();
-            if (renderer != null && colorList.Count > 0)
-            {
-                int colorIndex = Mathf.Clamp(data.value % colorList.Count, 0, colorList.Count - 1);
-                renderer.material.color = colorList[colorIndex];
-            }
+            //Renderer renderer = numberObj.GetComponent<Renderer>();
+            
 
             // Set number value using NumberProp
             NumberProp numberProp = numberObj.GetComponent<NumberProp>();
+            if (numberProp.skinnedMeshRenderer != null && colorList.Count > 0)
+            {
+                int colorIndex = Mathf.Clamp(data.value % colorList.Count, 0, colorList.Count - 1);
+                numberProp.skinnedMeshRenderer.material.color = colorList[colorIndex];
+            }
             if (numberProp != null)
             {
                 numberProp.SetNumberValue(data.value);
