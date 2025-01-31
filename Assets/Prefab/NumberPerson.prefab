@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3930658244524780490}
   - component: {fileID: 8664341047175508571}
   - component: {fileID: 820688661913715488}
-  - component: {fileID: 8342439109229134242}
+  - component: {fileID: 3353636407876072629}
   m_Layer: 0
-  m_Name: Person
+  m_Name: NumberPerson
   m_TagString: Person
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8342439109229134242
+--- !u!114 &3353636407876072629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,11 +116,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 55221838086962567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78352eb0c695ab849bd120227d13148e, type: 3}
+  m_Script: {fileID: 11500000, guid: fbfc572361c7e4944b73aaa62b272ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  operation: 
-  personText: {fileID: 5224263691874171610}
+  numberText: {fileID: 5224263691874171610}
 --- !u!1 &290517315992267369
 GameObject:
   m_ObjectHideFlags: 0

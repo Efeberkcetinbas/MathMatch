@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701bb4e18f0b9484ea147e08e7c48ce9, type: 3}
+  m_Name: NewLevelDoors
+  m_EditorClassIdentifier: 
+  doors:
+  - value: 25
+    color: {r: 0.33018857, g: 0.6697756, b: 1, a: 1}
+    doorPrefab: {fileID: 4792341168435007869, guid: ff6dced25875cc14d907b4a59b4aeb8b, type: 3}
+  - value: 57
+    color: {r: 0.43824205, g: 1, b: 0.32941175, a: 1}
+    doorPrefab: {fileID: 4792341168435007869, guid: ff6dced25875cc14d907b4a59b4aeb8b, type: 3}
+  - value: 96
+    color: {r: 0.7620585, g: 0.32941175, b: 1, a: 1}
+    doorPrefab: {fileID: 4792341168435007869, guid: ff6dced25875cc14d907b4a59b4aeb8b, type: 3}
