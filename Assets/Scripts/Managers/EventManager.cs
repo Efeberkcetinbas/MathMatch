@@ -13,6 +13,8 @@ public enum GameEvent
     OnIncreaseScore,
     OnUIUpdate,
     OnLevelUIUpdate,
+
+    //Door
     
     OnNextLevel,
     OnSuccess,

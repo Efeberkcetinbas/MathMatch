@@ -38,6 +38,14 @@ public class DoorGenerator : MonoBehaviour
             {
                 doorProp.SetDoorValue(data.value);
             }
+
+            DoorController doorController=door.GetComponent<DoorController>();
+            if(doorController!=null)
+            {
+                doorController.doorValue=data.value;
+            }
         }
+
+       
     }
 }

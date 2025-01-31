@@ -43,6 +43,7 @@ public class NumberGenerator : MonoBehaviour
             if (numberProp != null)
             {
                 numberProp.SetNumberValue(data.value);
+                numberProp.numberValue=data.value;
             }
         }
     }

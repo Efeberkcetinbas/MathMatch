@@ -7,6 +7,8 @@ public class NumberProp : MonoBehaviour
 {
     public TextMeshProUGUI numberText;
 
+    internal int numberValue;
+
     public void SetNumberValue(int value)
     {
         if (numberText != null)
