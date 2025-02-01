@@ -8,6 +8,7 @@ public class DoorController : MonoBehaviour
     public int doorValue;  // The value we set for this door
     public float raycastDistance = 10f; // Distance for the raycast
     public LayerMask numberLayer; // Layer mask to detect number objects
+    public bool matchNumbersValue=false;
 
     [SerializeField] private TextMeshProUGUI currentSum;
 
@@ -57,11 +58,14 @@ public class DoorController : MonoBehaviour
         if (sum == doorValue)
         {
             Debug.Log("The sum of numbers matches the door's value!");
+            matchNumbersValue=true;
         }
         else
         {
             Debug.Log("The sum of numbers does NOT match the door's value.");
+            matchNumbersValue=false;
         }
+
     }
 
     // Draw the ray in the scene for debugging

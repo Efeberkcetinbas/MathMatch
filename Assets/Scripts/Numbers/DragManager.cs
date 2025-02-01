@@ -15,12 +15,15 @@ public class DragManager : MonoBehaviour
     private Ground previousGround;
     private List<Ground> allGrounds = new List<Ground>(); // All ground objects
     private bool isLifted = false; // Track if a number is lifted
+    private WaitForSeconds waitForSeconds;
 
     private void Start()
     {
         // Find all ground objects in the scene
         Ground[] foundGrounds = FindObjectsOfType<Ground>();
         allGrounds.AddRange(foundGrounds);
+
+        waitForSeconds=new WaitForSeconds(0.25f);
     }
 
     private void Update()
@@ -109,6 +112,8 @@ public class DragManager : MonoBehaviour
         // Move number smoothly to new ground position
         selectedNumber.transform.DOMove(newGround.transform.position, moveDuration).OnComplete(()=>{
             EventManager.Broadcast(GameEvent.OnMoveNumberToGround);
+            StartCoroutine(SetCheckNumbersInDoors());
+
         });
         isLifted = false;
 
@@ -136,6 +141,12 @@ public class DragManager : MonoBehaviour
         isLifted = false;
         selectedNumber = null;
         EventManager.Broadcast(GameEvent.OnGroundDefaultColor);
+    }
+
+    private IEnumerator SetCheckNumbersInDoors()
+    {
+        yield return waitForSeconds;
+        EventManager.Broadcast(GameEvent.OnCheckNumbersInDoor);
     }
 
     private Ground GetGroundUnderNumber(Vector3 position)

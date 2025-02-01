@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
     public GameData gameData;
-    public PlayerData playerData;
 
 
     private WaitForSeconds waitForSeconds;
+
+    public List<DoorController> allDoors = new List<DoorController>(); // All door objects
 
 
     private void Awake() 
@@ -20,12 +22,23 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         waitForSeconds=new WaitForSeconds(2);
+
+        //TEMP
+        Invoke("OnGameStart",2);
+        
+    }
+
+    private void OnGameStart()
+    {
+        DoorController[] foundDoors = FindObjectsOfType<DoorController>();
+        allDoors.AddRange(foundDoors);
     }
 
     private void OnEnable()
     {
         EventManager.AddHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.AddHandler(GameEvent.OnRestartLevel,OnRestartLevel);
+        EventManager.AddHandler(GameEvent.OnCheckNumbersInDoor,OnCheckNumbersInDoor);
 
     }
 
@@ -33,9 +46,25 @@ public class GameManager : MonoBehaviour
     {
         EventManager.RemoveHandler(GameEvent.OnNextLevel,OnNextLevel);
         EventManager.RemoveHandler(GameEvent.OnRestartLevel,OnRestartLevel);
+        EventManager.RemoveHandler(GameEvent.OnCheckNumbersInDoor,OnCheckNumbersInDoor);
 
     }
 
+    private void OnCheckNumbersInDoor()
+    {
+        bool allDoorsMatch = allDoors.Count > 0 && allDoors.All(door => door.matchNumbersValue);
+
+        if (allDoorsMatch)
+        {
+            Debug.Log("Game Success! All doors match.");
+            // Call success function here
+        }
+        else
+        {
+            Debug.Log("Not all doors match. Keep playing!");
+            return;
+        }
+    }
     
     
 
@@ -50,18 +79,7 @@ public class GameManager : MonoBehaviour
         ClearData(false);
     }
 
-    private void OnConditionSuccess()
-    {
-        Debug.Log("PERFECT. CONG");
-        EventManager.Broadcast(GameEvent.OnSuccess);
-        StartCoroutine(OpenSuccess());
-
-        ///////////////////////////
-        
-        Debug.Log("END FAIL");
-        EventManager.Broadcast(GameEvent.OnGameOver);
-    }
-
+    
    
     private void OnGameOver()
     {

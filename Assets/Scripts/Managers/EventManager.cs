@@ -11,6 +11,10 @@ public enum GameEvent
     OnCheckGroundOccupied,
     OnGroundDefaultColor,
     OnMoveNumberToGround,
+
+    //Door
+    OnCheckNumbersInDoor,
+    
     
     //Game Management
     OnGameStart,
@@ -19,7 +23,7 @@ public enum GameEvent
     OnUIUpdate,
     OnLevelUIUpdate,
 
-    //Door
+    
     
     OnNextLevel,
     OnSuccess,
