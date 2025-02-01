@@ -6,6 +6,11 @@ public enum GameEvent
 {
     //Player
     OnPlayerStartMove,
+
+    //Number
+    OnCheckGroundOccupied,
+    OnGroundDefaultColor,
+    OnMoveNumberToGround,
     
     //Game Management
     OnGameStart,

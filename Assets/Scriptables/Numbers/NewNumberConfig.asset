@@ -15,7 +15,7 @@ MonoBehaviour:
   numbers:
   - value: 8
     numberPrefab: {fileID: 55221838086962567, guid: 0a53a6fd8b557644986ca473ee2cc1d8, type: 3}
-  - value: -4
+  - value: 4
     numberPrefab: {fileID: 55221838086962567, guid: 0a53a6fd8b557644986ca473ee2cc1d8, type: 3}
   - value: 6
     numberPrefab: {fileID: 55221838086962567, guid: 0a53a6fd8b557644986ca473ee2cc1d8, type: 3}

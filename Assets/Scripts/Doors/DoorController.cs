@@ -11,8 +11,24 @@ public class DoorController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI currentSum;
 
+    private void OnEnable()
+    {
+        EventManager.AddHandler(GameEvent.OnMoveNumberToGround,OnMoveNumberToGround);
+    }
 
-    private void Update()
+
+    private void OnDisable()
+    {
+        EventManager.RemoveHandler(GameEvent.OnMoveNumberToGround,OnMoveNumberToGround);
+    }
+
+
+    /*private void Update()
+    {
+        CheckNumberSum();
+    }*/
+
+    private void OnMoveNumberToGround()
     {
         CheckNumberSum();
     }
@@ -40,11 +56,11 @@ public class DoorController : MonoBehaviour
         // Check if the sum matches the door's value
         if (sum == doorValue)
         {
-            //Debug.Log("The sum of numbers matches the door's value!");
+            Debug.Log("The sum of numbers matches the door's value!");
         }
         else
         {
-            //Debug.Log("The sum of numbers does NOT match the door's value.");
+            Debug.Log("The sum of numbers does NOT match the door's value.");
         }
     }
 

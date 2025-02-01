@@ -27,7 +27,7 @@ public class NumberGenerator : MonoBehaviour
             int randomIndex = Random.Range(0, availablePositions.Count);
             Transform chosenPosition = availablePositions[randomIndex];
             availablePositions.RemoveAt(randomIndex); // Prevent reuse
-
+            chosenPosition.GetComponent<Ground>().IsOccupied=true;
             GameObject numberObj = Instantiate(data.numberPrefab, chosenPosition.position, Quaternion.identity);
 
             // Assign color based on value
@@ -47,5 +47,7 @@ public class NumberGenerator : MonoBehaviour
                 numberProp.numberValue=data.value;
             }
         }
+
+        EventManager.Broadcast(GameEvent.OnMoveNumberToGround);
     }
 }
