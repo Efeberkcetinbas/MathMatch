@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class NumberGenerator : MonoBehaviour
 {
-    public Number numberConfig; // ScriptableObject holding number data
-    public List<Transform> groundPositions; // Possible positions
-    public List<Color> colorList; // Colors assigned to numbers
+    public Number numberConfig;
+    public List<Transform> groundPositions;
+    public List<Color> colorList;
+    public GameObject hexParentPrefab;
 
     private void Start()
     {
@@ -26,24 +27,39 @@ public class NumberGenerator : MonoBehaviour
             // Get a random available position
             int randomIndex = Random.Range(0, availablePositions.Count);
             Transform chosenPosition = availablePositions[randomIndex];
-            availablePositions.RemoveAt(randomIndex); // Prevent reuse
-            chosenPosition.GetComponent<Ground>().IsOccupied=true;
-            GameObject numberObj = Instantiate(data.numberPrefab, chosenPosition.position, Quaternion.identity);
+            availablePositions.RemoveAt(randomIndex);
+            chosenPosition.GetComponent<Ground>().IsOccupied = true;
 
-            // Assign color based on value
-            //Renderer renderer = numberObj.GetComponent<Renderer>();
-            
+            // Instantiate Number Object
+            /*GameObject numberObj = Instantiate(data.numberPrefab, chosenPosition.position, Quaternion.identity);
+            NumberProp numberProp = numberObj.GetComponent<NumberProp>();*/
 
-            // Set number value using NumberProp
-            NumberProp numberProp = numberObj.GetComponent<NumberProp>();
-            if (numberProp.skinnedMeshRenderer != null && colorList.Count > 0)
+            /*if (numberProp.skinnedMeshRenderer != null && colorList.Count > 0)
             {
                 int colorIndex = Mathf.Clamp(data.value % colorList.Count, 0, colorList.Count - 1);
                 numberProp.skinnedMeshRenderer.material.color = colorList[colorIndex];
             }
+
             if (numberProp != null)
             {
                 numberProp.SetNumberValue(data.value);
+                numberProp.numberValue = data.value;
+            }*/
+
+            // Instantiate HexParent & HexChildren
+            GameObject hexParentObj = Instantiate(hexParentPrefab, chosenPosition.position , Quaternion.identity);
+            HexParent hexParent = hexParentObj.GetComponent<HexParent>();
+            NumberProp numberProp=hexParent.GetComponent<NumberProp>();
+            
+            if (hexParent != null)
+            {
+                hexParent.towerValue = data.value;
+                hexParent.SetInit();
+                StartCoroutine(hexParent.SpawnHexChildrenWithEffect());
+            }
+
+            if(numberProp!=null)
+            {
                 numberProp.numberValue=data.value;
             }
         }

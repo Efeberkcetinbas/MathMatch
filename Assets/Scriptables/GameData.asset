@@ -16,4 +16,4 @@ MonoBehaviour:
   increaseScore: 0
   levelIndex: 0
   levelNumber: 0
-  isGameEnd: 0
+  isGameEnd: 1
