@@ -11,6 +11,7 @@ public class HexParent : MonoBehaviour
     public Color[] valueColors; // Assign colors in Inspector
 
     private Color currentColor;
+     private List<HexChild> hexChildren = new List<HexChild>(); // Store spawned HexChildren
 
     public void SetInit()
     {
@@ -34,6 +35,7 @@ public class HexParent : MonoBehaviour
     public IEnumerator SpawnHexChildrenWithEffect()
     {
         int childCount = Mathf.Max(1, towerValue / 5);
+        hexChildren.Clear(); // Clear the list before spawning
 
         for (int i = 0; i < childCount; i++)
         {
@@ -46,6 +48,7 @@ public class HexParent : MonoBehaviour
             {
                 hexChildScript.SetHexColor(currentColor);
                 hexChildScript.SetHexChild(towerValue);
+                hexChildren.Add(hexChildScript); // Store reference in the list
             }
 
             child.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
@@ -53,5 +56,11 @@ public class HexParent : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+     // ✅ **New Method: Get list of HexChildren**
+    public List<HexChild> GetHexChildren()
+    {
+        return hexChildren;
     }
 }

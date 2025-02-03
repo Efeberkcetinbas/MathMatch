@@ -9,6 +9,7 @@ public class HexChild : MonoBehaviour
     [SerializeField] private Renderer rendererobj;
 
 
+
     public void SetHexChild(int towerValue)
     {
         if (textUI != null)
@@ -24,4 +25,5 @@ public class HexChild : MonoBehaviour
             rendererobj.material.color = parentColor;
         }
     }
+
 }

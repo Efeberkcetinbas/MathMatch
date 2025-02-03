@@ -55,7 +55,7 @@ public class NumberGenerator : MonoBehaviour
             {
                 hexParent.towerValue = data.value;
                 hexParent.SetInit();
-                StartCoroutine(hexParent.SpawnHexChildrenWithEffect());
+                //StartCoroutine(hexParent.SpawnHexChildrenWithEffect());
             }
 
             if(numberProp!=null)
