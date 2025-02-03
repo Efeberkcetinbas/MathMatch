@@ -78,12 +78,12 @@ public class HexParent : MonoBehaviour
             if (hexChild == topHexChild)
             {
                 // Set the Text GameObject active for the topmost HexChild
-                hexChild.textUI.gameObject.SetActive(true);
+                hexChild.textUI.transform.parent.gameObject.SetActive(true);
             }
             else
             {
                 // Set all other Text GameObjects inactive
-                hexChild.textUI.gameObject.SetActive(false);
+                hexChild.textUI.transform.parent.gameObject.SetActive(false);
             }
         }
     }

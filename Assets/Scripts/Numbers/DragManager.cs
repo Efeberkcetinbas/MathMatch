@@ -44,38 +44,44 @@ public class DragManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(touch.position);
         RaycastHit hit;
 
-        // Check if we touched a number object
+        // Check if we touched a HexChild
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, numberLayer))
         {
-            NumberDrag numberDrag = hit.collider.GetComponent<NumberDrag>();
-            if (numberDrag != null)
+            // If the hit object is a HexChild, get its parent NumberDrag
+            HexChild hexChild = hit.collider.GetComponent<HexChild>();
+            if (hexChild != null)
             {
-                // If tapping a different number, reset the previous one
-                if (selectedNumber != null && selectedNumber != numberDrag)
+                // Get the parent NumberDrag (i.e., the HexParent that owns this HexChild)
+                NumberDrag numberDrag = hexChild.GetComponentInParent<NumberDrag>();
+                if (numberDrag != null)
                 {
-                    ResetNumberPosition();
-                }
+                    // If tapping a different number, reset the previous one
+                    if (selectedNumber != null && selectedNumber != numberDrag)
+                    {
+                        ResetNumberPosition();
+                    }
 
-                // If the tapped number is the same and is lifted, reset it
-                if (selectedNumber == numberDrag && isLifted)
-                {
-                    ResetNumberPosition();
-                    return;
-                }
+                    // If the tapped number is the same and is lifted, reset it
+                    if (selectedNumber == numberDrag && isLifted)
+                    {
+                        ResetNumberPosition();
+                        return;
+                    }
 
-                // Raycast forward to check if another number is blocking
-                Vector3 rayDirection = numberDrag.transform.forward;
-                if (Physics.Raycast(numberDrag.transform.position, rayDirection, 50, numberLayer))
-                {
-                    Debug.Log($"Can't move {numberDrag.gameObject.name} because another number is in the way.");
-                }
-                else
-                {
-                    SelectNumber(numberDrag);
+                    // Raycast forward to check if another number is blocking
+                    Vector3 rayDirection = numberDrag.transform.forward;
+                    if (Physics.Raycast(numberDrag.transform.position, rayDirection, 50, numberLayer))
+                    {
+                        Debug.Log($"Can't move {numberDrag.gameObject.name} because another number is in the way.");
+                    }
+                    else
+                    {
+                        SelectNumber(numberDrag);
+                    }
                 }
             }
         }
-
+        // If we are dragging and we touch the ground, attempt to move the number to that ground
         else if (selectedNumber != null && Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
         {
             Ground ground = hit.collider.GetComponent<Ground>();
@@ -161,7 +167,7 @@ public class DragManager : MonoBehaviour
         // Detach all hexChildren from the parent so they don’t move with it
         foreach (var hexChild in hexChildren)
         {
-            hexChild.transform.SetParent(null);
+            hexChild.transform.SetParent(null); // Temporarily detach the child
         }
 
         // Reverse the order (so top becomes bottom)
@@ -195,7 +201,7 @@ public class DragManager : MonoBehaviour
             // Reattach hexChildren to the parent
             foreach (var hexChild in hexChildren)
             {
-                hexChild.transform.SetParent(selectedNumber.transform);
+                hexChild.transform.SetParent(hexParent.transform); // Reattach to the correct HexParent
             }
 
             EventManager.Broadcast(GameEvent.OnMoveNumberToGround);
@@ -206,20 +212,6 @@ public class DragManager : MonoBehaviour
     }
 
     
-    private void MoveMainNumberToTarget(Vector3 targetPosition)
-    {
-        if (selectedNumber == null) return;
-
-        // Move the main number after HexChildren have reached their destination
-        selectedNumber.transform.DOMove(targetPosition, moveDuration).OnComplete(() =>
-        {
-            EventManager.Broadcast(GameEvent.OnMoveNumberToGround);
-            StartCoroutine(SetCheckNumbersInDoors());
-        });
-
-        isLifted = false;
-        selectedNumber = null;
-    }
 
     private void ResetNumberPosition()
     {

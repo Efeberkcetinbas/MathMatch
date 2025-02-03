@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 693520354787116604}
   - component: {fileID: 3930658244524780490}
   - component: {fileID: 8664341047175508571}
-  - component: {fileID: 820688661913715488}
   - component: {fileID: 3353636407876072629}
   - component: {fileID: 5814647915862277213}
   - component: {fileID: 6923970600423482972}
+  - component: {fileID: 5697066529317114585}
   m_Layer: 6
   m_Name: NumberPerson
   m_TagString: Person
@@ -87,27 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &820688661913715488
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55221838086962567}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.4295526, z: 1}
-  m_Center: {x: 0, y: 0.001021117, z: 0}
 --- !u!114 &3353636407876072629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,3 +136,24 @@ MonoBehaviour:
   - {r: 1, g: 0.2980392, b: 0.33720222, a: 1}
   - {r: 0.7991209, g: 0.2980392, b: 1, a: 1}
   - {r: 0.39395753, g: 0.2980392, b: 1, a: 1}
+--- !u!65 &5697066529317114585
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55221838086962567}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
