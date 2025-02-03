@@ -120,9 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfc572361c7e4944b73aaa62b272ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberText: {fileID: 0}
   numberValue: 0
-  skinnedMeshRenderer: {fileID: 0}
 --- !u!114 &5814647915862277213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerValue: 0
-  yInterval: 0.5
+  yInterval: 0.2
   hexChildPrefab: {fileID: 8585055793359773221, guid: 3f914bfeb2c55324dade6284b530b988, type: 3}
   valueColors:
   - {r: 0.5113207, g: 1, b: 1, a: 1}

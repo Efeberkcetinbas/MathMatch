@@ -30,21 +30,7 @@ public class NumberGenerator : MonoBehaviour
             availablePositions.RemoveAt(randomIndex);
             chosenPosition.GetComponent<Ground>().IsOccupied = true;
 
-            // Instantiate Number Object
-            /*GameObject numberObj = Instantiate(data.numberPrefab, chosenPosition.position, Quaternion.identity);
-            NumberProp numberProp = numberObj.GetComponent<NumberProp>();*/
-
-            /*if (numberProp.skinnedMeshRenderer != null && colorList.Count > 0)
-            {
-                int colorIndex = Mathf.Clamp(data.value % colorList.Count, 0, colorList.Count - 1);
-                numberProp.skinnedMeshRenderer.material.color = colorList[colorIndex];
-            }
-
-            if (numberProp != null)
-            {
-                numberProp.SetNumberValue(data.value);
-                numberProp.numberValue = data.value;
-            }*/
+            
 
             // Instantiate HexParent & HexChildren
             GameObject hexParentObj = Instantiate(hexParentPrefab, chosenPosition.position , Quaternion.identity);

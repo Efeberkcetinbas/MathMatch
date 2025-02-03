@@ -98,7 +98,7 @@ public class DragManager : MonoBehaviour
             previousGround = GetGroundUnderNumber(number.transform.position);
 
             // Move the number **up** smoothly
-            selectedNumber.transform.DOMoveY(selectedNumber.transform.position.y + liftHeight, moveDuration);
+            //selectedNumber.transform.DOMoveY(selectedNumber.transform.position.y + liftHeight, moveDuration);
             isLifted = true;
 
             EventManager.Broadcast(GameEvent.OnCheckGroundOccupied);
@@ -200,6 +200,7 @@ public class DragManager : MonoBehaviour
 
             EventManager.Broadcast(GameEvent.OnMoveNumberToGround);
             selectedNumber = null;
+            hexParent.SetTopTextActive(hexChildren);
             StartCoroutine(SetCheckNumbersInDoors());
         });
     }

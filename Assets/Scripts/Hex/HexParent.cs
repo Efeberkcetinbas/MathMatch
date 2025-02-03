@@ -11,7 +11,7 @@ public class HexParent : MonoBehaviour
     public Color[] valueColors; // Assign colors in Inspector
 
     private Color currentColor;
-     private List<HexChild> hexChildren = new List<HexChild>(); // Store spawned HexChildren
+    private List<HexChild> hexChildren = new List<HexChild>(); // Store spawned HexChildren
 
     public void SetInit()
     {
@@ -56,11 +56,54 @@ public class HexParent : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+
+        SetTopTextActive(hexChildren);
     }
 
-     // ✅ **New Method: Get list of HexChildren**
+     //**New Method: Get list of HexChildren**
     public List<HexChild> GetHexChildren()
     {
         return hexChildren;
+    }
+
+    public void SetTopTextActive(List<HexChild> hexChildren)
+    {
+        // Get the topmost HexChild
+        HexChild topHexChild = GetTopHexChild(hexChildren);
+
+        // Loop through all HexChildren and update their Text GameObject
+        foreach (HexChild hexChild in hexChildren)
+        {
+            // Check if this is the topmost hexChild
+            if (hexChild == topHexChild)
+            {
+                // Set the Text GameObject active for the topmost HexChild
+                hexChild.textUI.gameObject.SetActive(true);
+            }
+            else
+            {
+                // Set all other Text GameObjects inactive
+                hexChild.textUI.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private HexChild GetTopHexChild(List<HexChild> hexChildren)
+    {
+        HexChild topHexChild = null;
+        float maxY = float.MinValue; // Set to lowest possible value to ensure any Y value is greater
+
+        // Loop through the list of hexChildren
+        foreach (HexChild hexChild in hexChildren)
+        {
+            // Compare Y positions to find the topmost
+            if (hexChild.transform.position.y > maxY)
+            {
+                maxY = hexChild.transform.position.y;
+                topHexChild = hexChild;
+            }
+        }
+
+        return topHexChild;
     }
 }
