@@ -70,14 +70,16 @@ public class DragManager : MonoBehaviour
 
                     // Raycast forward to check if another number is blocking
                     Vector3 rayDirection = numberDrag.transform.forward;
-                    if (Physics.Raycast(numberDrag.transform.position, rayDirection, 50, numberLayer))
+
+                    SelectNumber(numberDrag);
+                    /*if (Physics.Raycast(numberDrag.transform.position, rayDirection, 50, numberLayer))
                     {
                         Debug.Log($"Can't move {numberDrag.gameObject.name} because another number is in the way.");
                     }
                     else
                     {
                         SelectNumber(numberDrag);
-                    }
+                    }*/
                 }
             }
         }
