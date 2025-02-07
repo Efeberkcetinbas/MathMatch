@@ -37,7 +37,8 @@ public class DoorController : MonoBehaviour
     // Method to check if the sum of numbers matches the door's value
     void CheckNumberSum()
     {
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.back, raycastDistance, numberLayer);
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.back), raycastDistance, numberLayer);
+
 
         int sum = 0;
 
@@ -72,6 +73,6 @@ public class DoorController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, Vector3.back * raycastDistance);
+        Gizmos.DrawRay(transform.position, transform.TransformDirection(Vector3.back) * raycastDistance);
     }
 }

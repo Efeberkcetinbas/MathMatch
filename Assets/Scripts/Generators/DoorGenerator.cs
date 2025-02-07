@@ -27,7 +27,7 @@ public class DoorGenerator : MonoBehaviour
             Transform chosenPosition = availablePositions[randomIndex];
             availablePositions.RemoveAt(randomIndex); // Prevent reuse
 
-            GameObject door = Instantiate(data.doorPrefab, chosenPosition.position, Quaternion.identity);
+            GameObject door = Instantiate(data.doorPrefab, chosenPosition.position, chosenPosition.rotation);
             
             // Set door color
             door.GetComponent<Renderer>().material.color = data.color;
