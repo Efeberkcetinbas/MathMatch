@@ -10,8 +10,24 @@ public class HexParent : MonoBehaviour
     public GameObject hexChildPrefab;
     public Color[] valueColors; // Assign colors in Inspector
 
+    [SerializeField] private BoxCollider boxCollider;
     private Color currentColor;
     private List<HexChild> hexChildren = new List<HexChild>(); // Store spawned HexChildren
+
+
+    
+
+    private void OnEnable()
+    {
+        EventManager.AddHandler(GameEvent.OnHoldingNumber, OnHoldingNumber);
+        EventManager.AddHandler(GameEvent.OnReleaseNumber, OnReleaseNumber);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveHandler(GameEvent.OnHoldingNumber, OnHoldingNumber);
+        EventManager.RemoveHandler(GameEvent.OnReleaseNumber, OnReleaseNumber);
+    }
 
     public void SetInit()
     {
@@ -106,4 +122,18 @@ public class HexParent : MonoBehaviour
 
         return topHexChild;
     }
+
+    #region Tap Events
+    private void OnReleaseNumber()
+    {
+        boxCollider.enabled=true;
+    }
+
+    private void OnHoldingNumber()
+    {
+        boxCollider.enabled=false;
+    }
+
+    
+    #endregion
 }

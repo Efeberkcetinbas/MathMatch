@@ -11,6 +11,8 @@ public enum GameEvent
     OnCheckGroundOccupied,
     OnGroundDefaultColor,
     OnMoveNumberToGround,
+    OnHoldingNumber,
+    OnReleaseNumber,
 
     //Door
     OnCheckNumbersInDoor,

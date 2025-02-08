@@ -378,6 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textUI: {fileID: 3463812015262046908}
   rendererobj: {fileID: 2258420285470253474}
+  boxCollider: {fileID: 4998572335010840435}
 --- !u!65 &4998572335010840435
 BoxCollider:
   m_ObjectHideFlags: 0

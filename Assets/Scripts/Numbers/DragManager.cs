@@ -64,6 +64,7 @@ public class DragManager : MonoBehaviour
                     // If the tapped number is the same and is lifted, reset it
                     if (selectedNumber == numberDrag && isLifted)
                     {
+                        numberDrag.IsSelected=true;
                         ResetNumberPosition();
                         return;
                     }
@@ -110,6 +111,8 @@ public class DragManager : MonoBehaviour
             isLifted = true;
 
             EventManager.Broadcast(GameEvent.OnCheckGroundOccupied);
+            EventManager.Broadcast(GameEvent.OnHoldingNumber);
+
         }
     }
 
@@ -121,11 +124,13 @@ public class DragManager : MonoBehaviour
 
         if (hexChildren.Count > 0)
         {
+            EventManager.Broadcast(GameEvent.OnReleaseNumber);
             StartCoroutine(MoveHexChildrenWithEffect(hexChildren, newGround.transform.position));
         }
         else
         {
             // Move number smoothly if no hexChildren exist
+            EventManager.Broadcast(GameEvent.OnReleaseNumber);
             selectedNumber.transform.DOMove(newGround.transform.position, moveDuration).OnComplete(() =>
             {
                 EventManager.Broadcast(GameEvent.OnMoveNumberToGround);
@@ -222,6 +227,7 @@ public class DragManager : MonoBehaviour
         // Move the number **down** back to its original Y position
         selectedNumber.transform.DOMoveY(previousGround.transform.position.y, moveDuration);
         isLifted = false;
+        selectedNumber.IsSelected=false;
         selectedNumber = null;
         EventManager.Broadcast(GameEvent.OnGroundDefaultColor);
     }
