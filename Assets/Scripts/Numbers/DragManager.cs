@@ -184,6 +184,9 @@ public class DragManager : MonoBehaviour
         float fixedX = targetPosition.x;
         float fixedZ = targetPosition.z;
 
+        // Calculate movement direction based on difference between target and current position
+        Vector3 moveDirection = targetPosition - selectedNumber.transform.position;
+
         // Start moving from the new topmost (previously bottom) HexChild
         for (int i = 0; i < hexChildren.Count; i++)
         {
@@ -193,11 +196,29 @@ public class DragManager : MonoBehaviour
             // Target Y position based on new index
             float targetY = i * hexParent.yInterval;
 
+            // Determine rotation axis based on movement direction
+            Vector3 rotationAxis = Vector3.zero;
+            float rotationAngle = 360f; // Default rotation
+
+
+            if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.z))
+            {
+                // Moving more in the X direction (left/right) → Rotate around X-axis
+                rotationAxis = Vector3.forward;
+                rotationAngle = moveDirection.x > 0 ? -360f : 360f; // Rotate opposite directions
+            }
+            else
+            {
+                // Moving more in the Z direction (up/down) → Rotate around Z-axis
+                rotationAxis = Vector3.right;
+                rotationAngle = moveDirection.z > 0 ? 360f : -360f; // Rotate opposite directions
+            }
+
             // Animate each child separately
             hexChild.transform.DOJump(new Vector3(fixedX, targetY, fixedZ), 1.5f, 1, 0.5f)
                 .SetEase(Ease.OutQuad);
 
-            hexChild.transform.DORotate(new Vector3(360, 0, 0), 0.5f, RotateMode.FastBeyond360)
+            hexChild.transform.DORotate(rotationAxis * rotationAngle, 0.5f, RotateMode.FastBeyond360)
                 .SetEase(Ease.OutQuad);
 
             yield return new WaitForSeconds(0.1f); // Small delay between each jump
