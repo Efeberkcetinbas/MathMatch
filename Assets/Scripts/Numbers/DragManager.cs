@@ -188,6 +188,7 @@ public class DragManager : MonoBehaviour
         for (int i = 0; i < hexChildren.Count; i++)
         {
             HexChild hexChild = hexChildren[i];
+            hexChild.ResetHexText();
 
             // Target Y position based on new index
             float targetY = i * hexParent.yInterval;

@@ -94,7 +94,10 @@ public class HexParent : MonoBehaviour
             if (hexChild == topHexChild)
             {
                 // Set the Text GameObject active for the topmost HexChild
+                hexChild.textUI.transform.parent.transform.localScale=Vector3.zero;
                 hexChild.textUI.transform.parent.gameObject.SetActive(true);
+                hexChild.textUI.transform.parent.transform.DOScale(Vector3.one,0.25f).SetEase(Ease.OutQuart);
+                hexChild.SetHexChild(towerValue);
             }
             else
             {

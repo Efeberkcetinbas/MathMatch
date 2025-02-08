@@ -33,6 +33,14 @@ public class HexChild : MonoBehaviour
         }
     }
 
+    public void ResetHexText()
+    {
+        if (textUI != null)
+        {
+            textUI.SetText("");
+        }
+    }
+
     public void SetHexColor(Color parentColor)
     {
         if (rendererobj != null)
