@@ -11,7 +11,6 @@ public class DragManager : MonoBehaviour
     [SerializeField] private float liftHeight = 1f; // How high the number moves when selected
 
     private NumberDrag selectedNumber;
-    private NumberDrag previousNumber;
     private Ground previousGround;
     private List<Ground> allGrounds = new List<Ground>(); // All ground objects
     private bool isLifted = false; // Track if a number is lifted
@@ -92,6 +91,13 @@ public class DragManager : MonoBehaviour
             {
                 MoveNumberToGround(ground);
             }
+        }
+
+        else
+        {
+            //
+            ResetNumberPosition();
+            EventManager.Broadcast(GameEvent.OnReleaseNumber);
         }
     }
 
@@ -221,6 +227,8 @@ public class DragManager : MonoBehaviour
             hexChild.transform.DORotate(rotationAxis * rotationAngle, 0.5f, RotateMode.FastBeyond360)
                 .SetEase(Ease.OutQuad);
 
+            EventManager.Broadcast(GameEvent.OnHexAnimate);
+
             yield return new WaitForSeconds(0.1f); // Small delay between each jump
         }
 
@@ -245,6 +253,7 @@ public class DragManager : MonoBehaviour
     private void ResetNumberPosition()
     {
         if (selectedNumber == null) return;
+
 
         // Move the number **down** back to its original Y position
         selectedNumber.transform.DOMoveY(previousGround.transform.position.y, moveDuration);

@@ -50,6 +50,6 @@ public class NumberGenerator : MonoBehaviour
             }
         }
 
-        EventManager.Broadcast(GameEvent.OnMoveNumberToGround);
+        EventManager.Broadcast(GameEvent.OnGenerateNumbers);
     }
 }

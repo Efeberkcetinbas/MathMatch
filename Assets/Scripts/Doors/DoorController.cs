@@ -15,21 +15,25 @@ public class DoorController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddHandler(GameEvent.OnMoveNumberToGround,OnMoveNumberToGround);
+        EventManager.AddHandler(GameEvent.OnGenerateNumbers,OnGenerateNumbers);
     }
 
 
     private void OnDisable()
     {
         EventManager.RemoveHandler(GameEvent.OnMoveNumberToGround,OnMoveNumberToGround);
+        EventManager.RemoveHandler(GameEvent.OnGenerateNumbers,OnGenerateNumbers);
     }
 
 
-    /*private void Update()
-    {
-        CheckNumberSum();
-    }*/
+    
 
     private void OnMoveNumberToGround()
+    {
+        CheckNumberSum();
+    }
+
+    private void OnGenerateNumbers()
     {
         CheckNumberSum();
     }

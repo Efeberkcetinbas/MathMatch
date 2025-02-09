@@ -10,9 +10,13 @@ public enum GameEvent
     //Number
     OnCheckGroundOccupied,
     OnGroundDefaultColor,
+    OnGenerateNumbers,
     OnMoveNumberToGround,
     OnHoldingNumber,
     OnReleaseNumber,
+
+    //Hex
+    OnHexAnimate,
 
     //Door
     OnCheckNumbersInDoor,
