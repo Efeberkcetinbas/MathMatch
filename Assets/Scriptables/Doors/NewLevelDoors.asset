@@ -16,8 +16,8 @@ MonoBehaviour:
   - value: 25
     color: {r: 0.33018857, g: 0.6697756, b: 1, a: 1}
     doorPrefab: {fileID: 4792341168435007869, guid: ff6dced25875cc14d907b4a59b4aeb8b, type: 3}
-  - value: 57
-    color: {r: 0.43824205, g: 1, b: 0.32941175, a: 1}
+  - value: 63
+    color: {r: 1, g: 0.88994205, b: 0.32941175, a: 1}
     doorPrefab: {fileID: 4792341168435007869, guid: ff6dced25875cc14d907b4a59b4aeb8b, type: 3}
   - value: 96
     color: {r: 0.7620585, g: 0.32941175, b: 1, a: 1}

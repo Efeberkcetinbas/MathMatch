@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ground : MonoBehaviour
 {
     public bool IsOccupied = false;
-    [SerializeField] private Renderer groundRenderer;
+    public Renderer groundRenderer;
     private Color defaultColor;
 
     private void Start()
@@ -29,6 +29,7 @@ public class Ground : MonoBehaviour
 
     private void OnCheckGroundOccupied()
     {
+        defaultColor = groundRenderer.material.color;
         groundRenderer.material.color=IsOccupied ? defaultColor:Color.green;
     }
 

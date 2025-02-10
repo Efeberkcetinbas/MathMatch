@@ -8,7 +8,9 @@ public class DoorController : MonoBehaviour
     public int doorValue;  // The value we set for this door
     public float raycastDistance = 10f; // Distance for the raycast
     public LayerMask numberLayer; // Layer mask to detect number objects
+    public LayerMask groundLayer; // Layer mask to detect number objects
     public bool matchNumbersValue=false;
+    internal Color color;
 
     [SerializeField] private TextMeshProUGUI currentSum;
 
@@ -25,6 +27,10 @@ public class DoorController : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnGenerateNumbers,OnGenerateNumbers);
     }
 
+    private void Start()
+    {
+        StartCoroutine(SetMatColors());
+    }
 
     
 
@@ -69,6 +75,24 @@ public class DoorController : MonoBehaviour
         {
             Debug.Log("The sum of numbers does NOT match the door's value.");
             matchNumbersValue=false;
+        }
+
+    }
+
+    private IEnumerator SetMatColors()
+    {
+        yield return new WaitForSeconds(0.25f);
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.back), raycastDistance, groundLayer);
+
+        foreach (RaycastHit hit in hits)
+        {
+            // Get the NumberProp component from the hit object
+            Ground ground = hit.collider.GetComponent<Ground>();
+            if (ground != null)
+            {
+                ground.groundRenderer.material.color=color;
+            }
+
         }
 
     }

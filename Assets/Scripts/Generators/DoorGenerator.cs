@@ -28,9 +28,10 @@ public class DoorGenerator : MonoBehaviour
             availablePositions.RemoveAt(randomIndex); // Prevent reuse
 
             GameObject door = Instantiate(data.doorPrefab, chosenPosition.position, chosenPosition.rotation);
-            
+            door.GetComponent<DoorProp>().SetDoorChildRotateZero();
             // Set door color
-            door.GetComponent<Renderer>().material.color = data.color;
+            door.GetComponent<DoorProp>().SetMatColor(data.color);
+            door.GetComponent<DoorController>().color=data.color;
 
             // Set door value using DoorProp
             DoorProp doorProp = door.GetComponent<DoorProp>();
